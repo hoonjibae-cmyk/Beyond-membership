@@ -39,10 +39,15 @@
           body: JSON.stringify(payload)
         });
 
-        const result = await response.json();
+        let result = null;
+        try {
+          result = await response.json();
+        } catch (error) {
+          result = null;
+        }
 
-        if (!response.ok || !result.success) {
-          throw new Error(result.message || '전송에 실패했습니다.');
+        if (!response.ok || !result || !result.success) {
+          throw new Error((result && result.message) || '전송에 실패했습니다. 전화(031-794-3306)로 문의해 주세요.');
         }
 
         form.reset();
