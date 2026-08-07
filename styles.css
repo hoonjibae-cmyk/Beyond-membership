@@ -218,6 +218,11 @@ button,input,select,textarea { font: inherit; }
 .stat-item strong { display:inline-flex; align-items:flex-start; justify-content:center; color:var(--navy); font-size: clamp(2rem, 4vw, 3rem); line-height:1; white-space:nowrap; }
 .grade-unit { display:inline-block; font-size:.46em; margin-left:2px; line-height:1; position:relative; top:-0.18em; }
 .stat-item span { display:block; margin-top:10px; color:#5e6774; font-weight:700; }
+/* `.stat-item span` is more specific than `.grade-unit` and would flip the unit
+   to a block; keep 등급/석 inline and top-aligned with the number. */
+.stat-item .grade-unit { display:inline-block; margin-top:0; color:inherit; font-weight:inherit; }
+.stat-source { display:block; margin-top:6px; color:#8b93a0; font-size:12px; font-style:normal; font-weight:500; }
+.stats-disclaimer { margin:16px 0 0; color:#6a7380; font-size:13px; line-height:1.7; }
 .review-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 26px; }
 .review-card {
   background: rgba(255,255,255,0.88);
@@ -274,6 +279,14 @@ input:focus, select:focus, textarea:focus {
   outline:none; border-color:var(--gold); box-shadow: 0 0 0 4px rgba(184,155,102,0.14);
 }
 input:hover, select:hover, textarea:hover { transform: translateY(-1px); }
+.consent-box {
+  border:1px solid #e2e6ee; background:#f8f9fc; border-radius:14px; padding:18px 20px;
+}
+.consent-title { margin:0 0 12px; font-size:14px; font-weight:800; color:var(--navy); }
+.consent-list { margin:0; padding-left:18px; color:#4f5968; font-size:13px; line-height:1.8; }
+.consent-list strong { display:inline-block; min-width:112px; color:#465063; }
+.consent-note { margin:12px 0 0; color:#6a7380; font-size:13px; line-height:1.7; }
+.consent-note a { color:#1e3d7f; font-weight:700; text-decoration:underline; }
 .agree-row { grid-template-columns: 20px 1fr; align-items:start; gap:10px; }
 .agree-row input { margin-top:3px; width:18px; height:18px; }
 .agree-row span { font-weight:500; }
@@ -298,6 +311,20 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
 .table-footnotes { margin-top:18px; color:#dce4f1; font-size:14px; }
 .table-footnotes p { margin:6px 0; }
 
+.legal-page { padding-top: 130px; }
+.legal-shell { max-width: 860px; }
+.legal-page h1 { margin:0 0 18px; font-size: clamp(2rem, 4vw, 3rem); color:var(--navy); }
+.legal-lead { margin:0 0 12px; color:#4f5968; line-height:1.9; }
+.legal-block { margin-top: 38px; }
+.legal-block h2 { margin:0 0 12px; font-size:20px; color:var(--navy); }
+.legal-block p { margin:0 0 12px; color:#4f5968; line-height:1.9; }
+.legal-block ul { margin:0 0 12px; padding-left:20px; color:#4f5968; line-height:1.9; }
+.legal-block strong { color:#465063; }
+.legal-block a { color:#1e3d7f; font-weight:700; text-decoration:underline; }
+.legal-date { color:#6a7380; font-size:14px; }
+.legal-back { margin-top: 44px; }
+.legal-back a { color:#1e3d7f; font-weight:800; text-decoration:none; }
+
 .footer {
   background: radial-gradient(circle at top left, rgba(24, 58, 112, 0.45), transparent 34%), linear-gradient(180deg, #091729 0%, #07121f 100%);
   color:#fff;
@@ -318,6 +345,7 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
 .footer-divider { height:1px; background: rgba(215,191,142,0.24); margin: 36px 0 22px; }
 .footer-bottom p { margin: 0 0 8px; color:#afbed6; font-size:15px; }
 .footer-bottom p:last-child { margin-bottom:0; }
+.footer-links a { color:#d7c08f; font-weight:700; text-decoration:underline; }
 
 @media (max-width: 1100px) {
   .pricing-grid, .review-grid, .manage-grid { grid-template-columns: 1fr; }
