@@ -1,0 +1,9 @@
+{
+  "name": "beyond-membership-vercel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "BEYOND 2기 멤버십 홍보 웹페이지",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
