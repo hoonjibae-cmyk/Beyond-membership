@@ -177,6 +177,41 @@ button,input,select,textarea { font: inherit; }
 .manage-title { margin:0 0 16px; font-weight:700; }
 .manage-card ul { margin:0; padding-left:18px; color:#4f5968; }
 
+.schedule-head { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:26px; }
+.schedule-head h2 { margin:0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color:var(--navy); }
+.schedule-period { margin:0; color:#6a7380; font-weight:700; }
+.schedule-period strong { color:#7d6030; }
+.schedule-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:24px; }
+.schedule-card {
+  background: rgba(255,255,255,0.9);
+  border:1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding:28px;
+  box-shadow: var(--shadow);
+}
+.schedule-day { margin:0 0 18px; font-size:22px; font-weight:800; color:var(--navy); }
+.schedule-slots { list-style:none; margin:0; padding:0; display:grid; gap:14px; }
+.schedule-slots li { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.schedule-slots strong { font-size:17px; color:#2f3a4d; }
+.slot-tag {
+  flex-shrink:0; display:inline-flex; align-items:center; justify-content:center;
+  min-width:78px; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:800;
+}
+.slot-tag.mandatory { background:#122b5d; color:#fff; }
+.slot-tag.free { background:#f2e7d3; color:#71531f; }
+.coach-strip {
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:24px;
+  padding:18px 22px; background: rgba(248,241,229,0.9); border:1px solid #e6d8c1;
+  border-radius: var(--radius-sm); color:#694f24; font-weight:700;
+}
+.coach-label {
+  display:inline-flex; align-items:center; justify-content:center; background:var(--gold); color:#fff;
+  padding:8px 14px; border-radius:999px; font-size:14px; box-shadow: 0 10px 18px rgba(184,155,102,.18);
+}
+.coach-strip strong { color:#5a4118; }
+.schedule-notes { margin:22px 0 0; padding-left:20px; color:#5e6774; line-height:1.9; }
+.schedule-notes strong { color:#7d6030; }
+
 .pricing-section { background: linear-gradient(180deg, rgba(233,223,206,0.38), transparent 60%); }
 .discount-strip {
   display:flex; justify-content:space-between; gap:16px; align-items:center; flex-wrap:wrap;
@@ -348,7 +383,7 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
 .footer-links a { color:#d7c08f; font-weight:700; text-decoration:underline; }
 
 @media (max-width: 1100px) {
-  .pricing-grid, .review-grid, .manage-grid { grid-template-columns: 1fr; }
+  .pricing-grid, .review-grid, .manage-grid, .schedule-grid { grid-template-columns: 1fr; }
   .field-grid-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -373,7 +408,7 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
   .hero-subtitle { font-size: 17px; }
   .hero-actions { flex-direction: column; }
   .primary-btn, .secondary-btn { width:100%; }
-  .intro-card, .manage-card, .pricing-card, .form-card { padding: 22px; }
+  .intro-card, .manage-card, .pricing-card, .form-card, .schedule-card { padding: 22px; }
   .field-grid, .field-grid-wide, .stats-grid { grid-template-columns: 1fr; }
   .stat-item { border-right:0; border-bottom:1px solid var(--line); }
   .stat-item:last-child { border-bottom:0; }
