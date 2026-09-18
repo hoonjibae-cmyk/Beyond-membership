@@ -18,6 +18,8 @@
 }
 
 * { box-sizing: border-box; }
+/* sticky 헤더 높이만큼 앵커 위치를 내린다 (데스크톱 72px / 모바일 104px) */
+section[id], header[id] { scroll-margin-top: 88px; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -27,6 +29,10 @@ body {
     radial-gradient(circle at top right, rgba(215,191,142,0.1), transparent 28%),
     linear-gradient(180deg, #faf7f1 0%, #f7f3ed 100%);
   line-height: 1.68;
+  /* 한글은 단어 중간에서 줄바꿈되면 가독성이 크게 떨어진다.
+     keep-all 로 어절 단위 줄바꿈을 강제하고, 끊을 수 없는 긴 토큰만 예외로 허용. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 img { display:block; max-width:100%; }
 a { color: inherit; text-decoration: none; }
@@ -387,6 +393,13 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
 .table-section { background: linear-gradient(180deg, #102957 0%, #0d2147 100%); color:#fff; }
 .table-title-wrap h2 { margin:0 0 10px; font-size: clamp(2rem, 4vw, 3rem); }
 .table-title-wrap p { margin:0; color:#dce4f1; }
+.table-scroll-hint {
+  display: none;
+  margin: 22px 0 0;
+  color: #d6c3a0;
+  font-size: 13px;
+  font-weight: 700;
+}
 .table-wrapper { margin-top:28px; overflow-x:auto; background:#fff; border-radius: var(--radius-md); box-shadow: var(--shadow); }
 .table-wrapper table { width:100%; border-collapse: collapse; min-width: 840px; color:var(--text); }
 .table-wrapper th, .table-wrapper td { border:1px solid #e2d7c5; padding:14px 16px; text-align:center; }
@@ -442,7 +455,9 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
 }
 
 @media (max-width: 980px) {
+  section[id], header[id] { scroll-margin-top: 116px; }
   .footer-top, .form-head { flex-direction:column; align-items:flex-start; }
+  .table-scroll-hint { display: block; }
 
   /* 모바일 상단 바: 브랜드 + CTA 를 한 줄에 두고, 탭은 가로 1줄로 압축 */
   .quick-header-inner {
@@ -490,10 +505,24 @@ button[type="submit"]:disabled { cursor:wait; opacity:.7; transform:none; }
   .primary-btn, .secondary-btn { width:100%; }
   .intro-card, .manage-card, .pricing-card, .form-card, .schedule-card { padding: 22px; }
   .intro-photo { min-height: 240px; }
-  .field-grid, .field-grid-wide, .stats-grid { grid-template-columns: 1fr; }
-  .stat-item { border-right:0; border-bottom:1px solid var(--line); }
-  .stat-item:last-child { border-bottom:0; }
+  .field-grid, .field-grid-wide { grid-template-columns: 1fr; }
   .review-grid { grid-template-columns: 1fr; }
   .footer-top-left strong { font-size: 30px; }
   .footer-bottom p { font-size: 14px; line-height: 1.7; }
+
+  /* 카드 제목이 2글자짜리인데 과도하게 커서 축소 */
+  .manage-card h2 { font-size: 27px; }
+  .schedule-day { font-size: 20px; }
+  .quote { font-size: 1.3rem; }
+  .intro-text { font-size: 16px; }
+
+  /* 지표: 2단 유지하되 여백을 줄여 컴팩트하게 */
+  .stat-item { padding: 20px 12px; }
+  .stat-item span { font-size: 13px; margin-top: 8px; }
+  .stat-source { font-size: 11px; }
+
+  /* 개인정보 고지: 라벨과 내용을 한 줄에 붙이면 좁아서 읽기 어려움 → 라벨을 윗줄로 */
+  .consent-list strong { display: block; min-width: 0; margin-bottom: 2px; }
+  .consent-list { line-height: 1.7; }
+  .consent-list li + li { margin-top: 10px; }
 }
