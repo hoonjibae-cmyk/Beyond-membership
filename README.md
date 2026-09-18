@@ -219,3 +219,33 @@ npx.cmd vercel --prod --force
 
 관련 스타일은 `styles.css` 의 `.provider-tag`, `.provider-note`,
 `.price-caption`, `.price-monthly`, `.pricing-note` 규칙입니다.
+
+---
+
+## v7 변경 사항
+
+### 1. 철학 섹션 2단 레이아웃 + 센터 사진
+글이 짧은데 카드가 전체 폭을 차지하던 문제를 해결했습니다.
+
+- `.intro-layout` 2단 그리드로 변경 (좌: 인용 카드 / 우: 센터 사진)
+- `assets/study-center.jpg` 추가 (원본 2000×1500 → 1400px, 품질 0.82 재인코딩, 약 188KB)
+- 사진에 캡션 오버레이 `지정 좌석제로 운영되는 몰입실`
+- 카드 폭이 좁아진 만큼 인용 문구 크기를 축소하고 `text-wrap: balance` 적용
+- 1100px 이하에서 1단으로 전환 (사진 최소 높이 지정)
+
+### 2. 요금 카드 표기 순서 변경
+- 크게 표시되는 금액을 **월 기준 금액**으로 변경 (정가 26/30/35, 재원생가 20/24/29)
+- **3기 전체 선납 총액**을 카드 맨 아래 별도 블록으로 이동 (62/72/84, 48/58/70)
+- 총액 블록을 `margin-top:auto` 로 카드 하단에 고정해 세 카드의 총액 줄을 정렬
+- 비교표의 행 구성은 그대로 유지
+
+### 3. 신청서 유입경로에 남던 기수 오류 수정
+`script.js` 에 `'BEYOND 2기 멤버십 웹페이지'` 가 하드코딩되어 있어, 3기 신청서도
+2기로 접수되고 있었습니다.
+
+- `site-config.js` 에 `cohort`, `cohortPeriod` 추가 → 기수 변경 시 이 두 값만 수정
+- `payload.source` 를 `BEYOND ${cohort} 멤버십 웹페이지` 로 생성
+- `payload.cohort`, `payload.cohortPeriod` 필드를 추가 전송
+
+구글시트에 기수 열을 만들려면 Apps Script 의 `appendRow` 에 `data.cohort` 를
+추가하세요. (현재 스크립트는 매핑된 필드만 기록하므로 추가 필드는 무시됩니다.)

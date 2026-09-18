@@ -1,5 +1,8 @@
 window.SITE_CONFIG = {
   phone: '031-794-3306',
+  // 기수가 바뀌면 아래 두 값만 수정하면 신청서 유입경로 표기가 함께 바뀝니다.
+  cohort: '3기',
+  cohortPeriod: '2026-10-19 ~ 2026-12-31',
   businessInfo: {
     brandName: 'The Place 26',
     inquiry: '문의 031-794-3306',
