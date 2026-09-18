@@ -27,7 +27,10 @@
       const payload = Object.fromEntries(formData.entries());
       payload.privacyConsent = formData.get('privacyConsent') ? '동의' : '미동의';
       payload.submittedAt = new Date().toLocaleString('ko-KR', { hour12: false });
-      payload.source = 'BEYOND 2기 멤버십 웹페이지';
+      const cohort = config.cohort || '3기';
+      payload.cohort = cohort;
+      payload.cohortPeriod = config.cohortPeriod || '';
+      payload.source = `BEYOND ${cohort} 멤버십 웹페이지`;
 
       submitButton.disabled = true;
       statusEl.textContent = '신청 내용을 전송하고 있습니다...';
