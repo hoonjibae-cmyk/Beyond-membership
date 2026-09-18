@@ -176,6 +176,14 @@ button,input,select,textarea { font: inherit; }
 .manage-card h2 { margin:0 0 6px; font-size:32px; color:var(--navy); }
 .manage-title { margin:0 0 16px; font-weight:700; }
 .manage-card ul { margin:0; padding-left:18px; color:#4f5968; }
+.provider-tag {
+  display:inline-flex; align-items:center; margin:0 0 16px;
+  padding:6px 12px; border-radius:999px; font-size:12px; font-weight:800; letter-spacing:.01em;
+}
+.provider-tag.place { background:#eef1f7; color:#3c4a66; }
+.provider-tag.academy { background:#f2e7d3; color:#71531f; }
+.provider-note { margin:16px 0 0; padding-top:14px; border-top:1px solid var(--line); color:#6a7380; font-size:13px; line-height:1.7; }
+.provider-note strong { color:#465063; }
 
 .schedule-head { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:26px; }
 .schedule-head h2 { margin:0; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color:var(--navy); }
@@ -224,7 +232,13 @@ button,input,select,textarea { font: inherit; }
 }
 .pricing-card h3 { margin:0; font-size:36px; color:var(--navy); }
 .plan-type { margin:8px 0 22px; color:#7d6f59; font-weight:700; }
-.price-list { display:grid; gap:12px; margin:0 0 20px; }
+.price-caption { margin:0 0 10px; color:#7d6030; font-size:13px; font-weight:800; }
+.price-monthly { margin:-8px 0 20px; color:#6a7380; font-size:13px; font-weight:600; }
+.featured .price-caption { color:#f0d598; }
+.featured .price-monthly { color:#c9d4e8; }
+.pricing-note { margin:16px 0 0; color:#6a7380; font-size:13px; line-height:1.8; }
+.pricing-note strong { color:#7d6030; }
+.price-list { display:grid; gap:12px; margin:0 0 12px; }
 .price-list div { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
 .price-list dt { color:#6a7380; font-weight:700; }
 .price-list dd { margin:0; font-size:34px; font-weight:800; color:var(--navy); }
