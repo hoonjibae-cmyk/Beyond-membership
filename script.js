@@ -15,9 +15,43 @@
   bindText('footerBusinessAddress', businessInfo.businessAddress || '');
   bindText('footerNote', businessInfo.note || '');
 
+  // 하이픈 없이 입력된 번호는 구글시트가 숫자로 변환하면서 앞자리 0을 버린다.
+  // 전송 전에 하이픈을 넣어 시트가 문자열로 인식하도록 한다.
+  const formatPhone = (value) => {
+    const raw = String(value == null ? '' : value).trim();
+    let digits = raw.replace(/\D/g, '');
+    // 숫자가 없으면(예: 오타, 안내 문구) 입력값을 지우지 않고 그대로 보낸다.
+    if (!digits) return raw;
+
+    // 앞자리 0이 빠진 휴대폰 번호(10자리, 10으로 시작)는 0을 복원한다.
+    if (digits.length === 10 && digits.startsWith('10')) digits = '0' + digits;
+
+    if (digits.length === 11) {
+      return digits.replace(/^(\d{3})(\d{4})(\d{4})$/, '$1-$2-$3');
+    }
+    if (digits.length === 10) {
+      return digits.startsWith('02')
+        ? digits.replace(/^(\d{2})(\d{4})(\d{4})$/, '$1-$2-$3')
+        : digits.replace(/^(\d{3})(\d{3})(\d{4})$/, '$1-$2-$3');
+    }
+    if (digits.length === 9 && digits.startsWith('02')) {
+      return digits.replace(/^(\d{2})(\d{3})(\d{4})$/, '$1-$2-$3');
+    }
+    // 알 수 없는 형식은 입력값을 그대로 보낸다.
+    return raw;
+  };
+
   const form = document.getElementById('applyForm');
   const statusEl = document.getElementById('formStatus');
   const submitButton = document.getElementById('submitButton');
+
+  // 입력을 마치면 화면에서도 정리된 형식을 보여준다.
+  document.querySelectorAll('input[type="tel"]').forEach((input) => {
+    input.addEventListener('blur', () => {
+      const formatted = formatPhone(input.value);
+      if (formatted) input.value = formatted;
+    });
+  });
 
   if (form) {
     form.addEventListener('submit', async (event) => {
@@ -25,6 +59,8 @@
 
       const formData = new FormData(form);
       const payload = Object.fromEntries(formData.entries());
+      payload.parentPhone = formatPhone(payload.parentPhone);
+      payload.studentPhone = formatPhone(payload.studentPhone);
       payload.privacyConsent = formData.get('privacyConsent') ? '동의' : '미동의';
       payload.submittedAt = new Date().toLocaleString('ko-KR', { hour12: false });
       const cohort = config.cohort || '3기';
