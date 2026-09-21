@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BEYOND 3기 멤버십 포스터</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── A4 1장 인쇄용. 값은 mm 기준이라 화면 배율과 무관하게 동일하게 출력된다. ── */
+      @page { size: A4 portrait; margin: 0; }
+
+      :root {
+        --navy: #16294a;
+        --navy-2: #1e3559;
+        --gold: #b08c4f;
+        --gold-soft: #d9bd85;
+        --cream: #f7f1e6;
+        --cream-2: #efe5d4;
+        --line: #ded2bd;
+        --ink: #23303f;
+        --muted: #6b7686;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        width: 210mm;
+        height: 297mm;
+        font-family: "Noto Sans KR", sans-serif;
+        color: var(--ink);
+        background: #fff;
+        /* 한글 어절 중간 줄바꿈 방지 */
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .pad { padding: 0 10mm; }
+
+      /* ── 헤더 ── */
+      .head {
+        background: linear-gradient(135deg, var(--navy-2) 0%, var(--navy) 100%);
+        color: #fff;
+        padding: 4mm 10mm 3.2mm;
+      }
+      .eyebrow {
+        display: flex; align-items: center; gap: 3mm;
+        font-size: 8pt; font-weight: 700; letter-spacing: .22em;
+        color: var(--gold-soft); text-transform: uppercase;
+      }
+      .eyebrow::before { content: ""; width: 9mm; height: 1px; background: var(--gold-soft); }
+      .wordmark { display: flex; align-items: baseline; gap: 3.5mm; margin-top: 2mm; }
+      .wordmark b { font-size: 24pt; font-weight: 900; letter-spacing: .1em; line-height: 1; }
+      .wordmark span { font-size: 9.5pt; font-weight: 500; color: #d8e0ec; }
+      .headline { margin-top: 2.4mm; font-size: 15pt; font-weight: 800; line-height: 1.24; }
+      .headline em { font-style: normal; color: var(--gold-soft); }
+      .head-sub {
+        margin-top: 2mm; font-size: 7.3pt; font-weight: 400;
+        color: #cfd9e8; line-height: 1.5; max-width: 168mm;
+      }
+
+      /* ── 모집 공지 띠 ── */
+      .notice {
+        background: var(--cream-2);
+        border-bottom: 1px solid var(--line);
+        display: flex; align-items: center; gap: 4mm;
+        padding: 2.2mm 10mm;
+      }
+      .notice-pill {
+        background: #b0503a; color: #fff; font-size: 8pt; font-weight: 800;
+        padding: 1.4mm 3mm; border-radius: 99px; white-space: nowrap;
+      }
+      .notice-text { font-size: 8.2pt; font-weight: 700; color: #6b4f24; }
+
+      /* ── 본문 ── */
+      main { flex: 1; background: var(--cream); padding: 2.4mm 0 0; display: flex; flex-direction: column; }
+
+      .quote-row { display: flex; gap: 3.5mm; align-items: flex-start; }
+      .quote-mark { font-size: 16pt; font-weight: 900; color: var(--gold); line-height: .9; }
+      .quote-head { font-size: 9.8pt; font-weight: 800; color: #6b5220; line-height: 1.4; }
+      .quote-body { margin-top: 1.2mm; font-size: 7.5pt; color: #4f5968; line-height: 1.5; }
+
+      .label {
+        font-size: 7.5pt; font-weight: 800; letter-spacing: .2em;
+        color: var(--gold); text-transform: uppercase;
+      }
+      .label.plain { text-transform: none; letter-spacing: .06em; }
+
+      /* ── 관리 3영역 ── */
+      .manage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin-top: 1.6mm; }
+      .m-card { border-left: 1px solid var(--line); padding-left: 3.4mm; }
+      .m-card:first-child { border-left: 0; padding-left: 0; }
+      .m-no { font-size: 7.5pt; font-weight: 800; color: var(--gold); }
+      .m-title { font-size: 11pt; font-weight: 800; color: var(--navy); margin-top: .5mm; }
+      .m-sub { font-size: 7.4pt; font-weight: 700; color: #7b6c56; margin-top: .8mm; }
+      .m-tag {
+        display: inline-block; margin-top: 1.5mm; padding: .9mm 2.2mm; border-radius: 99px;
+        font-size: 6.2pt; font-weight: 800;
+      }
+      .m-tag.place { background: #e6eaf2; color: #3c4a66; }
+      .m-tag.academy { background: #f0e3cb; color: #6d5119; }
+      .m-list { margin-top: 1.5mm; list-style: none; }
+      .m-list li {
+        position: relative; padding-left: 2.6mm; font-size: 7.3pt;
+        color: #4f5968; line-height: 1.36;
+      }
+      .m-list li::before {
+        content: ""; position: absolute; left: 0; top: 1.7mm;
+        width: 1.1mm; height: 1.1mm; border-radius: 50%; background: var(--gold);
+      }
+      .provider-note {
+        margin-top: 1.5mm; font-size: 6.2pt; color: var(--muted); line-height: 1.4;
+      }
+      .provider-note b { color: #4a5568; }
+
+      /* ── 운영 시간 ── */
+      .hours {
+        margin-top: 1.8mm; display: grid; grid-template-columns: repeat(3, 1fr);
+        gap: 2.5mm; background: #fff; border: 1px solid var(--line);
+        border-radius: 2mm; padding: 1.8mm 2.6mm;
+      }
+      .h-col + .h-col { border-left: 1px solid var(--line); padding-left: 3mm; }
+      .h-day { font-size: 7.8pt; font-weight: 800; color: var(--navy); }
+      .h-line { display: flex; align-items: center; gap: 1.6mm; margin-top: 1.1mm; }
+      .h-tag {
+        font-size: 6.5pt; font-weight: 800; padding: .8mm 2mm; border-radius: 99px;
+        white-space: nowrap; min-width: 13mm; text-align: center;
+      }
+      .h-tag.must { background: var(--navy); color: #fff; }
+      .h-tag.free { background: #f0e3cb; color: #6d5119; }
+      .h-time { font-size: 7.3pt; font-weight: 700; color: #3c4756; }
+      .hours-note { margin-top: 1mm; font-size: 6.2pt; color: var(--muted); line-height: 1.45; }
+
+      /* ── 요금 ── */
+      .pricing { margin-top: 2mm; }
+      .disc {
+        display: flex; align-items: center; justify-content: space-between; gap: 4mm;
+        background: #f2e8d7; border: 1px solid var(--line); border-radius: 2mm;
+        padding: 1.6mm 3.4mm; font-size: 7.4pt; font-weight: 800; color: #6b4f24;
+      }
+      .disc-badge {
+        background: var(--gold); color: #fff; font-size: 7.5pt; font-weight: 800;
+        padding: 1.2mm 3mm; border-radius: 99px; white-space: nowrap;
+      }
+      .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: 1.8mm; }
+      .plan {
+        position: relative; background: #fff; border: 1px solid var(--line);
+        border-radius: 2mm; padding: 2.8mm 2.8mm 2.4mm; display: flex; flex-direction: column;
+      }
+      .plan.hot { background: linear-gradient(160deg, var(--navy-2), var(--navy)); border-color: transparent; color: #fff; }
+      .plan-badge {
+        position: absolute; top: -2.6mm; left: 4mm; background: var(--gold); color: #fff;
+        font-size: 6.5pt; font-weight: 800; padding: 1mm 2.6mm; border-radius: 99px;
+      }
+      .plan-name { font-size: 12.5pt; font-weight: 800; color: var(--navy); line-height: 1; }
+      .plan.hot .plan-name { color: #fff; }
+      .plan-type { font-size: 7pt; font-weight: 700; color: #7b6c56; margin-top: 1mm; }
+      .plan.hot .plan-type { color: #c8d3e6; }
+      .price { display: flex; align-items: baseline; justify-content: space-between; margin-top: 1.9mm; }
+      .price dt { font-size: 7.5pt; font-weight: 700; color: var(--muted); }
+      .plan.hot .price dt { color: #c8d3e6; }
+      .price dd { font-size: 11.5pt; font-weight: 800; color: var(--navy); }
+      .price dd small { font-size: 7.5pt; font-weight: 700; color: var(--muted); }
+      .plan.hot .price dd { color: #fff; }
+      .plan.hot .price dd small { color: #c8d3e6; }
+      .price.member dd { color: var(--gold); }
+      .plan.hot .price.member dd { color: var(--gold-soft); }
+      .plan-desc { margin-top: 1.6mm; font-size: 6.3pt; color: #4f5968; line-height: 1.38; }
+      .plan.hot .plan-desc { color: #d5deeb; }
+      .plan-total { margin-top: auto; padding-top: 1.9mm; border-top: 1px solid var(--line); }
+      .plan.hot .plan-total { border-top-color: rgba(255,255,255,.18); }
+      .total-label { font-size: 6.5pt; font-weight: 800; color: #7b6c56; }
+      .plan.hot .total-label { color: var(--gold-soft); }
+      .total-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1mm; }
+      .total-row span { font-size: 7.5pt; font-weight: 700; color: var(--muted); }
+      .total-row b { font-size: 9pt; font-weight: 800; color: var(--navy); }
+      .plan.hot .total-row span { color: #c8d3e6; }
+      .plan.hot .total-row b { color: #fff; }
+      .pay-note { margin-top: 1.4mm; font-size: 6.2pt; color: var(--muted); line-height: 1.5; }
+
+      /* ── 지표 ── */
+      .stats {
+        margin-top: 1.6mm; display: grid; grid-template-columns: repeat(4, 1fr);
+        background: #fff; border: 1px solid var(--line); border-radius: 2mm; overflow: hidden;
+      }
+      .stat { padding: 1.6mm 1.4mm; text-align: center; border-left: 1px solid var(--line); }
+      .stat:first-child { border-left: 0; }
+      .stat b { font-size: 13.5pt; font-weight: 800; color: var(--navy); line-height: 1; }
+      .stat b i { font-style: normal; font-size: 8pt; vertical-align: super; }
+      .stat span { display: block; margin-top: 1.1mm; font-size: 7pt; font-weight: 700; color: #5e6774; }
+      .stat em { display: block; margin-top: .5mm; font-style: normal; font-size: 6pt; color: #949cab; }
+
+      /* ── CTA ── */
+      .cta {
+        margin-top: auto; background: linear-gradient(135deg, var(--navy-2), var(--navy));
+        color: #fff; padding: 2.2mm 10mm; display: flex; align-items: center;
+        justify-content: space-between; gap: 6mm;
+      }
+      .cta h2 { font-size: 12pt; font-weight: 800; line-height: 1.25; }
+      .cta-badge {
+        display: inline-block; margin-top: 1.8mm; padding: 1.2mm 3mm; border-radius: 99px;
+        border: 1px solid rgba(217,189,133,.55); color: var(--gold-soft);
+        font-size: 7.5pt; font-weight: 700;
+      }
+      .cta-contact { margin-top: 1.8mm; font-size: 9pt; font-weight: 800; }
+      .cta-contact b { color: var(--gold-soft); }
+      .cta-brand { margin-top: 1mm; font-size: 7.5pt; color: #c2cddf; }
+      .cta-fine { margin-top: 1.6mm; font-size: 5.8pt; color: #93a1b8; line-height: 1.5; max-width: 118mm; }
+      .qr { text-align: center; flex: none; }
+      .qr img { width: 21mm; height: 21mm; display: block; background: #fff; padding: 1.4mm; border-radius: 1.6mm; }
+      .qr span { display: block; margin-top: 1.6mm; font-size: 7pt; font-weight: 700; color: var(--gold-soft); }
+    </style>
+  </head>
+  <body>
+    <header class="head">
+      <p class="eyebrow">The place 26 by 목동유쌤</p>
+      <div class="wordmark">
+        <b>BEYOND</b>
+        <span>학습 집중 관리 센터</span>
+      </div>
+      <h1 class="headline">의지가 아니라,<br /><em>환경</em>이 바꿉니다.</h1>
+      <p class="head-sub">
+        자습 환경은 더플레이스26 스터디카페가, 학습 방향과 진학 코칭은 목동유쌤영어학원이 맡아
+        학기 중 학생의 자습 시간을 관리하는 프로그램입니다.
+      </p>
+    </header>
+
+    <div class="notice">
+      <span class="notice-pill">1기 · 2기 연속 전석 마감</span>
+      <span class="notice-text">BEYOND 3기 멤버십 모집 · 10월 19일 ~ 12월 31일 · 26석 한정</span>
+    </div>
+
+    <main>
+      <div class="pad">
+        <div class="quote-row">
+          <span class="quote-mark">“</span>
+          <div>
+            <p class="quote-head">자리는 스터디카페에도 있습니다. 학생에게 필요한 건 관리입니다.</p>
+            <p class="quote-body">
+              휴대폰을 손에 쥔 채, 계획 없이 앉아만 있는 자습은 성적으로 이어지지 않습니다.
+              BEYOND는 ‘더 열심히 하라’고 말하는 대신, 공부를 할 수밖에 없도록 환경을 바꿉니다.
+            </p>
+          </div>
+        </div>
+
+        <p class="label" style="margin-top:2.2mm">What we manage</p>
+        <div class="manage">
+          <div class="m-card">
+            <p class="m-no">01</p>
+            <p class="m-title">환경</p>
+            <p class="m-sub">공부할 수밖에 없는 자리</p>
+            <span class="m-tag place">더플레이스26 스터디카페 제공</span>
+            <ul class="m-list">
+              <li>출결 체크 · 입퇴실 알림</li>
+              <li>휴대폰 제출 · 보관</li>
+              <li>비학습 사이트 차단</li>
+              <li>의무 교시제 운영</li>
+              <li>주간 학습 리포트</li>
+            </ul>
+          </div>
+          <div class="m-card">
+            <p class="m-no">02</p>
+            <p class="m-title">방향</p>
+            <p class="m-sub">오래 앉는 게 아니라, 제대로</p>
+            <span class="m-tag academy">목동유쌤영어학원 연계 제공</span>
+            <ul class="m-list">
+              <li>1:1 학습방향 코칭</li>
+              <li>플래너 점검 · 피드백</li>
+              <li>과목 균형 점검</li>
+              <li>주간 계획 이행 코칭</li>
+            </ul>
+          </div>
+          <div class="m-card">
+            <p class="m-no">03</p>
+            <p class="m-title">진학</p>
+            <p class="m-sub">자습을 진학 준비로</p>
+            <span class="m-tag academy">목동유쌤영어학원 연계 제공</span>
+            <ul class="m-list">
+              <li>진학 방향 · 교내 활동 설계 상담</li>
+              <li>정기 심층 상담</li>
+              <li>자료조사 · 글쓰기 방법 코칭</li>
+              <li>보고서 구조 설계 코칭</li>
+            </ul>
+          </div>
+        </div>
+        <p class="provider-note">
+          * <b>02 방향</b> · <b>03 진학</b> 은 교육청에 등록된 목동유쌤영어학원이 담당하는 학원 교습 과정입니다.
+          학교에 제출하는 수행평가 · 보고서의 대리 작성이나 대리 수정은 제공하지 않으며,
+          학교생활기록부를 열람하거나 대신 기재하지 않습니다.
+        </p>
+
+        <p class="label plain" style="margin-top:2mm">운영 시간 · 10월 19일(월) ~ 12월 31일(목)</p>
+        <div class="hours">
+          <div class="h-col">
+            <p class="h-day">평일</p>
+            <div class="h-line"><span class="h-tag must">의무자습</span><span class="h-time">오후 5시 ~ 오후 10시</span></div>
+            <div class="h-line"><span class="h-tag free">자율학습</span><span class="h-time">오전 9시 ~ 자정</span></div>
+          </div>
+          <div class="h-col">
+            <p class="h-day">토요일</p>
+            <div class="h-line"><span class="h-tag must">의무자습</span><span class="h-time">오전 9시 ~ 오후 6시</span></div>
+            <div class="h-line"><span class="h-tag free">자율학습</span><span class="h-time">오후 6시 ~ 오후 10시</span></div>
+          </div>
+          <div class="h-col">
+            <p class="h-day">일요일 · 공휴일</p>
+            <div class="h-line"><span class="h-tag free">자율학습</span><span class="h-time">오전 9시 ~ 오후 10시</span></div>
+            <div class="h-line"><span class="h-time" style="font-size:7pt;color:#6b7686">매주 토요일 1:1 상담 진행</span></div>
+          </div>
+        </div>
+        <p class="hours-note">
+          * 내신 임박 시기에는 토요일 · 일요일 · 공휴일 자율학습을 새벽 1시까지 연장합니다.
+          의무자습 중에는 사전 설문으로 허용된 일정에 한해 외출이 가능합니다.
+        </p>
+
+        <div class="pricing">
+          <p class="label plain">3가지 관리 단계</p>
+          <div class="disc" style="margin-top:1.6mm">
+            <span>목동유쌤영어 재원생 월 6만원 할인</span>
+            <span class="disc-badge">3기 전 기간 선납</span>
+          </div>
+
+          <div class="plans">
+            <article class="plan">
+              <p class="plan-name">Lite</p>
+              <p class="plan-type">기본 관리형</p>
+              <dl class="price"><dt>정가</dt><dd>26만원<small>/월</small></dd></dl>
+              <dl class="price member"><dt>재원생가</dt><dd>20만원<small>/월</small></dd></dl>
+              <p class="plan-desc">
+                공부할 수밖에 없는 환경. 출결 · 휴대폰 보관 · 사이트 차단 · 의무 교시제 · 주간 리포트로
+                자습 습관을 잡아줍니다.
+              </p>
+              <div class="plan-total">
+                <p class="total-label">3기 전체 선납 총액</p>
+                <p class="total-row"><span>정가</span><b>62만원</b></p>
+                <p class="total-row"><span>재원생가</span><b>48만원</b></p>
+              </div>
+            </article>
+
+            <article class="plan">
+              <p class="plan-name">Plus</p>
+              <p class="plan-type">대표 관리형</p>
+              <dl class="price"><dt>정가</dt><dd>30만원<small>/월</small></dd></dl>
+              <dl class="price member"><dt>재원생가</dt><dd>24만원<small>/월</small></dd></dl>
+              <p class="plan-desc">
+                Lite 기본 혜택 + 목동유쌤영어학원 연계 코칭. 과목별 계획, 플래너 관리와
+                진학 방향 심층 상담까지 포함됩니다.
+              </p>
+              <div class="plan-total">
+                <p class="total-label">3기 전체 선납 총액</p>
+                <p class="total-row"><span>정가</span><b>72만원</b></p>
+                <p class="total-row"><span>재원생가</span><b>58만원</b></p>
+              </div>
+            </article>
+
+            <article class="plan hot">
+              <span class="plan-badge">학기 중 추천</span>
+              <p class="plan-name">Premium</p>
+              <p class="plan-type">심화 코칭형</p>
+              <dl class="price"><dt>정가</dt><dd>35만원<small>/월</small></dd></dl>
+              <dl class="price member"><dt>재원생가</dt><dd>29만원<small>/월</small></dd></dl>
+              <p class="plan-desc">
+                Plus 기본 혜택 + 목동유쌤영어학원 연계 자료조사 · 글쓰기 코칭. 학생이 스스로 쓸 수
+                있도록 자료를 찾고 글의 구조를 잡는 방법을 훈련합니다.
+              </p>
+              <div class="plan-total">
+                <p class="total-label">3기 전체 선납 총액</p>
+                <p class="total-row"><span>정가</span><b>84만원</b></p>
+                <p class="total-row"><span>재원생가</span><b>70만원</b></p>
+              </div>
+            </article>
+          </div>
+
+          <p class="pay-note">
+            * 3기는 월별 납입 없이 전 기간(10/19 ~ 12/31) 선납으로만 운영됩니다. 월 금액은 참고용입니다.
+          </p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <b>96<i>%</i></b><span>학부모 만족도</span><em>자체 설문 결과</em>
+          </div>
+          <div class="stat">
+            <b>99<i>%</i></b><span>재등록 의향</span><em>자체 설문 결과</em>
+          </div>
+          <div class="stat">
+            <b>1.33<i>등급</i></b><span>참여 학생 평균 등급 변화</span><em>자체 집계 결과</em>
+          </div>
+          <div class="stat">
+            <b>26<i>석</i></b><span>소수정예 한정</span><em>기수당 모집 정원</em>
+          </div>
+        </div>
+      </div>
+
+      <section class="cta">
+        <div>
+          <h2>지금, 3기 멤버십을 예약하세요.</h2>
+          <span class="cta-badge">3기 · 10/19 ~ 12/31 · 26석 한정 · 선착순 모집</span>
+          <p class="cta-contact">상담 문의 <b>031-794-3306</b></p>
+          <p class="cta-brand">Beyond · The place 26 by 목동유쌤</p>
+          <p class="cta-fine">
+            * 위 수치는 2025년 겨울 기수 수료생 및 학부모를 대상으로 한 자체 설문 · 집계 결과이며,
+            조사 대상 · 시점에 따라 달라질 수 있습니다. 개별 학생의 성적 향상이나 특정 결과를 보장하지 않습니다.
+          </p>
+        </div>
+        <div class="qr">
+          <img src="./assets/qr.png" alt="beyond.yussam.com QR 코드" />
+          <span>beyond.yussam.com</span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
