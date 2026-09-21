@@ -40,50 +40,92 @@ Vercel 프로젝트의 Environment Variables에 아래 값을 추가하세요.
 
 ---
 
-## Google Apps Script 예시
+## Google Apps Script (기수별 시트 분기)
+
+신청서는 `cohort` 값(`site-config.js` 의 `cohort`, 현재 `3기`)을 함께 전송합니다.
+아래 스크립트는 그 값과 같은 이름의 시트를 찾아 기록하고, 시트가 없으면
+헤더와 함께 새로 만듭니다. 기수가 바뀌면 `site-config.js` 의 `cohort` 만
+고치면 되고 Apps Script 는 다시 건드릴 필요가 없습니다.
+
 ```javascript
+const HEADERS = [
+  '접수일시', '유입경로', '학생이름', '학교', '학년', '희망상품',
+  '재원생여부', '학부모연락처', '학생연락처', '문의사항', '개인정보동의'
+];
+
 function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('신청내역') || SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-  const data = JSON.parse(e.postData.contents);
+  try {
+    const data = JSON.parse(e.postData.contents);
+    const sheet = getTargetSheet(data.cohort);
 
-  sheet.appendRow([
-    data.submittedAt || '',
-    data.source || '',
-    data.studentName || '',
-    data.school || '',
-    data.grade || '',
-    data.program || '',
-    data.enrollmentStatus || '',
-    data.parentPhone || '',
-    data.studentPhone || '',
-    data.notes || '',
-    data.privacyConsent || ''
-  ]);
+    sheet.appendRow([
+      data.submittedAt || '',
+      data.source || '',
+      data.studentName || '',
+      data.school || '',
+      data.grade || '',
+      data.program || '',
+      data.enrollmentStatus || '',
+      data.parentPhone || '',
+      data.studentPhone || '',
+      data.notes || '',
+      data.privacyConsent || ''
+    ]);
 
+    return json({ success: true });
+  } catch (err) {
+    // 실패를 감춰서는 안 된다. api/submit.js 가 success:false 를 보고 502 를 돌려준다.
+    return json({ success: false, message: String(err) });
+  }
+}
+
+// 기수 이름과 같은 시트로 분기한다. 없으면 헤더를 넣어 새로 만든다.
+function getTargetSheet(cohort) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const name = String(cohort || '').trim();
+
+  if (!name) {
+    // 기수 값이 없는 예전 페이지(캐시)에서 들어온 요청
+    return ss.getSheetByName('신청내역') || ss.getSheets()[0];
+  }
+  return ss.getSheetByName(name) || createCohortSheet(ss, name);
+}
+
+function createCohortSheet(ss, name) {
+  const sheet = ss.insertSheet(name);
+  sheet.appendRow(HEADERS);
+  sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+  sheet.setFrozenRows(1);
+  // 연락처 열을 텍스트 서식으로 고정해 앞자리 0 이 사라지지 않게 한다.
+  sheet.getRange('H:I').setNumberFormat('@');
+  return sheet;
+}
+
+function json(obj) {
   return ContentService
-    .createTextOutput(JSON.stringify({ success: true }))
+    .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
 ```
 
-### 권장 시트 헤더
-- 접수일시
-- 유입경로
-- 학생이름
-- 학교
-- 학년
-- 희망상품
-- 재원생여부
-- 학부모연락처
-- 학생연락처
-- 문의사항
-- 개인정보동의
+### 시트 헤더 (A ~ K 열)
+접수일시 · 유입경로 · 학생이름 · 학교 · 학년 · 희망상품 · 재원생여부 ·
+학부모연락처 · 학생연락처 · 문의사항 · 개인정보동의
 
-Apps Script 작성 후:
-1. **배포 > 새 배포**
-2. 유형: **웹 앱**
-3. 액세스 권한: **Anyone** 또는 **Anyone with the link**
-4. 발급된 URL을 Vercel 환경변수 `GOOGLE_APPS_SCRIPT_URL`에 입력
+### 반영 방법
+1. Apps Script 편집기에서 위 코드로 교체 후 저장
+2. **배포 > 배포 관리 > (기존 배포) 편집 > 버전: 새 버전 > 배포**
+
+> 2번에서 **`새 배포`가 아니라 기존 배포를 편집**해야 합니다.
+> 새 배포를 만들면 URL 이 바뀌어 Vercel 환경변수
+> `GOOGLE_APPS_SCRIPT_URL` 도 함께 수정해야 합니다.
+
+### 이미 만들어 둔 시트에 적용할 때
+수동으로 만든 시트에는 `createCohortSheet()` 의 서식 설정이 적용되지 않습니다.
+해당 시트에서 아래를 직접 확인해 주세요.
+
+- 1행 헤더가 위 11개 열 순서와 같은지
+- `H:I`(연락처) 열 서식이 **일반**이면 **서식 > 숫자 > 일반 텍스트** 로 변경
 
 ---
 
@@ -411,3 +453,21 @@ Noto Sans KR 을 실제로 적용한 상태에서 360 / 390 / 430 / 768 / 1280px
 의무자습(오후 5시 ~ 오후 10시)과 시간대가 겹치는 표기입니다.
 자율학습이 센터 개방 시간 전체를, 의무자습이 그중 필수 참여 구간을
 나타내는 구조입니다.
+
+---
+
+## v13 변경 사항
+
+### 신청 내역을 기수별 시트로 분기
+Apps Script 가 `'신청내역'` 시트에만 기록하던 것을, 신청서가 함께 보내는
+`cohort` 값(`3기`)과 같은 이름의 시트로 분기하도록 변경했습니다.
+
+- 웹 쪽은 이미 `payload.cohort` 를 전송하고 있어 **수정이 없습니다.**
+  변경 대상은 Apps Script 뿐입니다. (위 `Google Apps Script` 절 참조)
+- 시트가 없으면 헤더 · 고정행 · 연락처 열 텍스트 서식까지 갖춰 자동 생성
+- `cohort` 값이 없는 예전 페이지(캐시) 요청은 `'신청내역'` 으로 폴백
+- `try / catch` 를 추가해 실패 시 `success:false` 를 반환
+  (기존 스크립트는 실패해도 `success:true` 를 돌려줬습니다)
+
+4기 이후에는 `site-config.js` 의 `cohort` 만 바꾸면 해당 이름의 시트가
+자동으로 만들어지므로 Apps Script 를 다시 수정할 필요가 없습니다.
